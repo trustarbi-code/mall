@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#172B4D">
+<title>상담 관리</title>
+<link rel="icon" href="chat/avatar.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#F4F7FB;--surface:#FFFFFF;--surface-2:#F3F9FF;--ink:#17161B;--soft:#4A4A52;--muted:#7A7A82;--line:#E4E7EC;
+  --accent:#1088ED;--cta:#0875D1;--navy:#172B4D;--navy-2:#1E3A5F;--danger:#D92D20;--ok:#22C55E;
+  --kr:"Pretendard Variable","Noto Sans KR",-apple-system,BlinkMacSystemFont,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0B1628;--surface:#12233D;--surface-2:#0F1E35;--ink:#EAF5FF;--soft:#B8C9DE;--muted:#7D93B3;--line:rgba(255,255,255,.10);
+    --accent:#4FA8F5;--cta:#1777D6;--navy:#081222;--navy-2:#0D1B30;}
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;}
+body{background:var(--bg);color:var(--ink);font-family:var(--kr);-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:anywhere;}
+button{font-family:inherit;}
+[hidden]{display:none!important}
+
+/* 로그인 */
+.gate{min-height:100%;display:grid;place-items:center;padding:24px;background:linear-gradient(160deg,var(--navy),var(--navy-2));}
+.gate-card{width:min(380px,100%);background:var(--surface);border-radius:20px;padding:32px 28px;text-align:center;box-shadow:0 30px 70px -20px rgba(0,0,0,.5);}
+.gate-card img{width:72px;height:72px;border-radius:50%;object-fit:cover;margin-bottom:14px;}
+.gate-card h1{font-size:1.3rem;margin:0 0 6px;font-weight:800;}
+.gate-card p{margin:0 0 22px;color:var(--muted);font-size:.9rem;line-height:1.55;}
+.btn{border:0;border-radius:12px;padding:12px 18px;font-size:.92rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;}
+.btn-pri{background:var(--cta);color:#fff;width:100%;}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--line);}
+.gate .msg{margin-top:14px;font-size:.84rem;color:var(--danger);}
+
+/* 앱 */
+.app{height:100%;height:100dvh;display:flex;flex-direction:column;}
+.top{flex-shrink:0;display:flex;align-items:center;gap:12px;padding:12px 18px;padding-top:max(12px,env(safe-area-inset-top));background:var(--navy);color:#EAF5FF;}
+.top .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1rem;margin-right:auto;}
+.top .brand img{width:30px;height:30px;border-radius:50%;object-fit:cover;}
+.top .brand small{font-weight:500;color:#7D93B3;font-size:.74rem;}
+.sw{display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:700;cursor:pointer;user-select:none;padding:6px 10px;border-radius:100px;background:rgba(255,255,255,.07);}
+.sw input{display:none;}
+.sw .tr{width:36px;height:20px;border-radius:10px;background:#475569;position:relative;transition:background .2s;}
+.sw .tr::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s;}
+.sw input:checked + .tr{background:var(--ok);}
+.sw input:checked + .tr::after{transform:translateX(16px);}
+.icon-btn{border:0;background:rgba(255,255,255,.07);color:#EAF5FF;border-radius:10px;height:34px;padding:0 11px;font-size:.78rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;}
+.icon-btn:hover{background:rgba(255,255,255,.16);}
+.demo-bar{background:#FFF7D6;color:#7A5B00;font-size:.78rem;text-align:center;padding:7px 12px;flex-shrink:0;}
+
+.main{flex:1;min-height:0;display:grid;grid-template-columns:340px 1fr;}
+.list{border-right:1px solid var(--line);background:var(--surface);overflow-y:auto;}
+.list-head{position:sticky;top:0;background:var(--surface);padding:14px 16px 10px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:8px;z-index:1;}
+.list-head b{font-size:.95rem;}
+.list-head span{font-size:.78rem;color:var(--muted);}
+.item{display:flex;gap:11px;padding:13px 16px;border-bottom:1px solid var(--line);cursor:pointer;position:relative;background:none;border-left:3px solid transparent;width:100%;text-align:left;color:inherit;border-top:0;border-right:0;}
+.item:hover{background:var(--surface-2);}
+.item.on{background:var(--surface-2);border-left-color:var(--accent);}
+.item .ini{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-weight:800;font-size:.9rem;color:#fff;}
+.item .tx{flex:1;min-width:0;}
+.item .r1{display:flex;align-items:center;gap:6px;}
+.item .nm{font-weight:800;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.item .tm{margin-left:auto;font-size:.7rem;color:var(--muted);white-space:nowrap;}
+.item .lm{font-size:.82rem;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.item.unread .lm{color:var(--ink);font-weight:600;}
+.item .ud{width:9px;height:9px;border-radius:50%;background:#FF4D4F;flex-shrink:0;display:none;}
+.item.unread .ud{display:block;}
+.empty{padding:40px 22px;text-align:center;color:var(--muted);font-size:.88rem;line-height:1.6;}
+
+.thread{display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--bg);}
+.th-head{flex-shrink:0;display:flex;align-items:center;gap:12px;padding:12px 18px;background:var(--surface);border-bottom:1px solid var(--line);}
+.th-head .back{display:none;}
+.th-head .who{flex:1;min-width:0;}
+.th-head .who b{display:block;font-size:1rem;}
+.th-head .who span{display:block;font-size:.78rem;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.th-head .who a{color:var(--accent);}
+.th-act{border:1px solid var(--line);background:var(--surface);color:var(--soft);border-radius:10px;height:34px;padding:0 12px;font-size:.78rem;font-weight:700;cursor:pointer;}
+.th-act.del:hover{color:var(--danger);border-color:var(--danger);}
+.th-body{flex:1;overflow-y:auto;padding:20px 18px 10px;}
+.row{display:flex;margin-bottom:6px;}
+.row.me{justify-content:flex-end;}
+.col{max-width:72%;display:flex;flex-direction:column;}
+.row.me .col{align-items:flex-end;}
+.bub{padding:10px 13px;border-radius:16px;font-size:.92rem;line-height:1.55;white-space:pre-wrap;}
+.row.them .bub{background:var(--surface);border:1px solid var(--line);border-top-left-radius:6px;}
+.row.me .bub{background:var(--cta);color:#fff;border-top-right-radius:6px;}
+.meta{font-size:.68rem;color:var(--muted);margin:3px 4px 5px;}
+.day{text-align:center;font-size:.72rem;color:var(--muted);margin:10px 0 14px;}
+.th-foot{flex-shrink:0;padding:10px 14px;padding-bottom:max(10px,env(safe-area-inset-bottom));background:var(--surface);border-top:1px solid var(--line);}
+.inp{display:flex;align-items:flex-end;gap:8px;background:var(--surface-2);border:1px solid var(--line);border-radius:16px;padding:6px 6px 6px 14px;}
+.inp:focus-within{border-color:var(--accent);}
+.inp textarea{flex:1;border:0;background:transparent;color:var(--ink);font:inherit;font-size:.95rem;line-height:1.5;resize:none;max-height:160px;min-height:24px;padding:6px 0;outline:none;}
+.send{width:40px;height:40px;border-radius:12px;border:0;background:var(--cta);color:#fff;cursor:pointer;display:grid;place-items:center;flex-shrink:0;}
+.send:disabled{opacity:.35;cursor:default;}
+.hint{font-size:.7rem;color:var(--muted);margin-top:6px;text-align:right;}
+.placeholder{flex:1;display:grid;place-items:center;color:var(--muted);font-size:.9rem;text-align:center;padding:24px;line-height:1.6;}
+
+/* 확인 창 */
+.modal{position:fixed;inset:0;background:rgba(8,18,34,.55);display:grid;place-items:center;z-index:50;padding:20px;}
+.modal-card{background:var(--surface);border-radius:16px;padding:22px;width:min(360px,100%);}
+.modal-card h3{margin:0 0 8px;font-size:1.02rem;}
+.modal-card p{margin:0 0 18px;color:var(--muted);font-size:.86rem;line-height:1.55;}
+.modal-card .acts{display:flex;gap:8px;justify-content:flex-end;}
+.btn-danger{background:var(--danger);color:#fff;}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#172B4D;color:#fff;padding:10px 16px;border-radius:12px;font-size:.84rem;z-index:60;box-shadow:0 10px 30px -10px rgba(0,0,0,.4);}
+
+@media (max-width:760px){
+  .main{grid-template-columns:1fr;}
+  .list{border-right:0;}
+  .app.viewing .list{display:none;}
+  .app:not(.viewing) .thread{display:none;}
+  .th-head .back{display:inline-flex;}
+  .top .brand small,.icon-btn .lbl{display:none;}
+  .col{max-width:84%;}
+}
+</style>
+</head>
+<body>
+
+<!-- 로그인 화면 -->
+<div class="gate" id="gate" hidden>
+  <div class="gate-card">
+    <img src="chat/avatar.jpg" alt="">
+    <h1>상담 관리</h1>
+    <p>포트폴리오 방문자의 상담 메시지를 확인하고<br>실시간으로 답장하는 페이지예요.</p>
+    <button class="btn btn-pri" id="signIn" type="button">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+      Google 계정으로 로그인
+    </button>
+    <div class="msg" id="gateMsg" hidden></div>
+    <button class="btn btn-ghost" id="gateOut" type="button" hidden style="margin-top:12px;width:100%">다른 계정으로 로그인</button>
+  </div>
+</div>
+
+<!-- 관리 화면 -->
+<div class="app" id="app" hidden>
+  <div class="demo-bar" id="demoBar" hidden>미리보기 모드 · 같은 브라우저의 포트폴리오 탭과만 대화가 오가요 (Firebase 연결 전)</div>
+  <header class="top">
+    <div class="brand"><img src="chat/avatar.jpg" alt=""><span>상담 관리</span><small id="who"></small></div>
+    <label class="sw" title="켜두면 방문자에게 '지금 대화 가능'으로 보여요"><input type="checkbox" id="onlineSw"><span class="tr"></span><span id="swLbl">상담 가능</span></label>
+    <button class="icon-btn" id="notiBtn" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="lbl" id="notiLbl">알림 켜기</span></button>
+    <button class="icon-btn" id="signOut" type="button"><span class="lbl">로그아웃</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></button>
+  </header>
+  <div class="main">
+    <aside class="list" id="list">
+      <div class="list-head"><b>대화</b><span id="count"></span></div>
+      <div id="items"><div class="empty">불러오는 중…</div></div>
+    </aside>
+    <section class="thread" id="thread">
+      <div class="placeholder" id="ph">왼쪽에서 대화를 선택하세요.<br>새 메시지가 오면 이 페이지에서 소리와 알림으로 알려드려요.</div>
+      <div class="th-head" id="thHead" hidden>
+        <button class="th-act back" id="back" type="button">← 목록</button>
+        <div class="who"><b id="thName"></b><span id="thInfo"></span></div>
+        <button class="th-act del" id="delBtn" type="button">삭제</button>
+      </div>
+      <div class="th-body" id="thBody" hidden></div>
+      <div class="th-foot" id="thFoot" hidden>
+        <div class="inp"><textarea id="reply" rows="1" maxlength="1000" placeholder="답장을 입력하세요"></textarea>
+          <button class="send" id="sendBtn" type="button" disabled aria-label="보내기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button></div>
+        <div class="hint">Enter 보내기 · Shift+Enter 줄바꿈</div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="modal" id="modal" hidden><div class="modal-card"><h3>이 대화를 삭제할까요?</h3><p>대화 내용이 모두 지워지고 되돌릴 수 없어요. 방문자 화면에서도 사라집니다.</p>
+  <div class="acts"><button class="btn btn-ghost" id="mNo" type="button">취소</button><button class="btn btn-danger" id="mYes" type="button">삭제</button></div></div></div>
+
+<script type="module">
+import { CHAT_CONFIG, getBackend, isDemo, esc, fmtTime, toMs } from "./chat/chat-core.js";
+
+const $ = (id) => document.getElementById(id);
+const S = { be: null, convs: [], sel: null, msgs: [], unsubMsgs: null, unsubConvs: null, hb: null, loaded: false, lastSeenUpd: {}, titleBase: "상담 관리" };
+const LS = { get(k){try{return localStorage.getItem(k);}catch(e){return null;}}, set(k,v){try{localStorage.setItem(k,v);}catch(e){}} };
+const COLORS = ["#1088ED","#7C3AED","#0EA5E9","#F59E0B","#10B981","#EF4444","#EC4899","#6366F1"];
+const colorFor = (id) => COLORS[[...id].reduce((a,c)=>a+c.charCodeAt(0),0)%COLORS.length];
+const nameOf = (c) => c.name || ("방문자 " + c.id.slice(-4).toUpperCase());
+
+function toast(t){ const d=document.createElement("div"); d.className="toast"; d.textContent=t; document.body.appendChild(d); setTimeout(()=>d.remove(),2200); }
+
+/* ---------- 로그인 ---------- */
+async function boot(){
+  S.be = await getBackend();
+  if (isDemo) $("demoBar").hidden = false;
+  S.be.adminWatchAuth((u) => {
+    if (!u) return showGate("");
+    const ok = isDemo || (u.verified && String(u.email).toLowerCase() === String(CHAT_CONFIG.adminEmail).toLowerCase());
+    if (!ok) return showGate(`${u.email} 계정은 관리 권한이 없어요. 설정된 관리자 계정으로 로그인해 주세요.`, true);
+    $("who").textContent = u.email;
+    startApp();
+  });
+}
+function showGate(msg, wrong){
+  stopApp();
+  $("app").hidden = true; $("gate").hidden = false;
+  $("gateMsg").hidden = !msg; $("gateMsg").textContent = msg || "";
+  $("gateOut").hidden = !wrong; $("signIn").hidden = !!wrong;
+}
+$("signIn").onclick = async () => {
+  try { await S.be.adminSignIn(); }
+  catch(e){ $("gateMsg").hidden=false; $("gateMsg").textContent = e && e.code === "auth/popup-blocked" ? "팝업이 차단됐어요. 브라우저에서 팝업을 허용해 주세요." : "로그인하지 못했어요. 잠시 후 다시 시도해 주세요."; }
+};
+$("gateOut").onclick = async () => { await S.be.adminSignOut(); $("signIn").hidden=false; $("gateOut").hidden=true; $("gateMsg").hidden=true; };
+$("signOut").onclick = async () => { await setOnline(false); await S.be.adminSignOut(); };
+
+/* ---------- 앱 ---------- */
+function startApp(){
+  $("gate").hidden = true; $("app").hidden = false;
+  if (S.unsubConvs) return;
+  S.unsubConvs = S.be.watchConversations(onConvs, (e) => {
+    $("items").innerHTML = `<div class="empty">대화를 불러오지 못했어요.<br>Firestore 보안 규칙의 관리자 이메일을 확인해 주세요.</div>`;
+  });
+  const saved = LS.get("ecw-admin-online");
+  $("onlineSw").checked = saved === null ? true : saved === "1";
+  setOnline($("onlineSw").checked);
+  updateNotiBtn();
+}
+function stopApp(){
+  if (S.unsubConvs){ S.unsubConvs(); S.unsubConvs=null; }
+  if (S.unsubMsgs){ S.unsubMsgs(); S.unsubMsgs=null; }
+  clearInterval(S.hb); S.hb=null; S.loaded=false;
+}
+
+/* 상담 가능 표시 (1분마다 신호) */
+async function setOnline(on){
+  $("swLbl").textContent = on ? "상담 가능" : "부재중";
+  LS.set("ecw-admin-online", on ? "1" : "0");
+  clearInterval(S.hb); S.hb = null;
+  try { await S.be.adminSetStatus(on); } catch(e){}
+  if (on) S.hb = setInterval(() => S.be.adminSetStatus(true).catch(()=>{}), 60000);
+}
+$("onlineSw").onchange = (e) => setOnline(e.target.checked);
+window.addEventListener("pagehide", () => { if ($("onlineSw").checked && S.be) S.be.adminSetStatus(false).catch(()=>{}); });
+document.addEventListener("visibilitychange", () => { if (!document.hidden && $("onlineSw").checked && S.be) S.be.adminSetStatus(true).catch(()=>{}); });
+
+/* ---------- 대화 목록 ---------- */
+function onConvs(list){
+  const prev = S.convs;
+  S.convs = list;
+  // 새 방문자 메시지 감지 → 알림
+  if (S.loaded){
+    list.forEach((c) => {
+      const old = prev.find((p) => p.id === c.id);
+      const newer = !old || toMs(c.updatedAt) > toMs(old.updatedAt);
+      if (newer && c.lastSender === "visitor" && c.unreadByAdmin) {
+        const viewing = S.sel === c.id && !document.hidden;
+        if (!viewing) notify(nameOf(c), c.lastMessage || "");
+      }
+    });
+  }
+  S.loaded = true;
+  renderList();
+  if (S.sel){
+    const c = list.find((x) => x.id === S.sel);
+    if (!c) { closeThread(); }
+    else { renderHead(c); if (c.unreadByAdmin && !document.hidden) S.be.adminMarkRead(c.id).catch(()=>{}); }
+  }
+  const unread = list.filter((c) => c.unreadByAdmin).length;
+  document.title = (unread ? `(${unread}) ` : "") + S.titleBase;
+}
+function renderList(){
+  const n = S.convs.length;
+  $("count").textContent = n ? `${n}건` : "";
+  if (!n){ $("items").innerHTML = `<div class="empty">아직 들어온 상담이 없어요.<br>방문자가 메시지를 보내면 여기에 바로 나타나요.</div>`; return; }
+  $("items").innerHTML = S.convs.map((c) => {
+    const nm = nameOf(c);
+    return `<button type="button" class="item${c.unreadByAdmin ? " unread" : ""}${S.sel === c.id ? " on" : ""}" data-id="${esc(c.id)}">
+      <span class="ini" style="background:${colorFor(c.id)}">${esc(nm.replace("방문자 ","").slice(0,1))}</span>
+      <span class="tx"><span class="r1"><span class="nm">${esc(nm)}</span><span class="ud"></span><span class="tm">${fmtTime(toMs(c.updatedAt))}</span></span>
+      <span class="lm">${c.lastSender === "admin" ? "나: " : ""}${esc(c.lastMessage || "")}</span></span></button>`;
+  }).join("");
+}
+$("items").addEventListener("click", (e) => { const b = e.target.closest(".item"); if (b) openThread(b.getAttribute("data-id")); });
+
+/* ---------- 대화 보기 ---------- */
+function openThread(id){
+  S.sel = id;
+  $("app").classList.add("viewing");
+  $("ph").hidden = true; ["thHead","thBody","thFoot"].forEach((k) => $(k).hidden = false);
+  const c = S.convs.find((x) => x.id === id); if (c) renderHead(c);
+  renderList();
+  if (S.unsubMsgs) S.unsubMsgs();
+  $("thBody").innerHTML = "";
+  S.unsubMsgs = S.be.watchMessages(id, (list) => { S.msgs = list; renderMsgs(); });
+  if (c && c.unreadByAdmin) S.be.adminMarkRead(id).catch(()=>{});
+  if (matchMedia("(min-width:761px)").matches) setTimeout(() => $("reply").focus(), 100);
+}
+function closeThread(){
+  S.sel = null; if (S.unsubMsgs){ S.unsubMsgs(); S.unsubMsgs=null; }
+  $("app").classList.remove("viewing");
+  $("ph").hidden = false; ["thHead","thBody","thFoot"].forEach((k) => $(k).hidden = true);
+  renderList();
+}
+$("back").onclick = closeThread;
+function renderHead(c){
+  $("thName").textContent = nameOf(c);
+  const bits = [];
+  if (c.contact){
+    const ct = c.contact.trim();
+    const href = /@/.test(ct) ? `mailto:${ct}` : /^[0-9+\-\s()]{8,}$/.test(ct) ? `tel:${ct.replace(/[^0-9+]/g,"")}` : "";
+    bits.push(href ? `<a href="${esc(href)}">${esc(ct)}</a>` : esc(ct));
+  } else bits.push("연락처 미입력");
+  if (c.createdAt) bits.push(`시작 ${fmtTime(toMs(c.createdAt))}`);
+  $("thInfo").innerHTML = bits.join(" · ");
+}
+function renderMsgs(){
+  const box = $("thBody");
+  const stick = box.scrollHeight - box.scrollTop - box.clientHeight < 100;
+  let h = "", lastDay = "";
+  S.msgs.forEach((m, i) => {
+    const ms = toMs(m.createdAt); const d = ms ? new Date(ms).toLocaleDateString("ko-KR",{month:"long",day:"numeric",weekday:"short"}) : "";
+    if (d && d !== lastDay){ h += `<div class="day">${d}</div>`; lastDay = d; }
+    const me = m.from === "admin"; const nx = S.msgs[i+1];
+    const showMeta = !nx || nx.from !== m.from || toMs(nx.createdAt) - ms > 5*60*1000;
+    h += `<div class="row ${me ? "me" : "them"}"><div class="col"><div class="bub">${esc(m.text)}</div>${showMeta && ms ? `<div class="meta">${fmtTime(ms)}</div>` : ""}</div></div>`;
+  });
+  box.innerHTML = h || `<div class="day">메시지가 없어요</div>`;
+  if (stick || S.justSent){ box.scrollTop = box.scrollHeight; S.justSent = false; }
+}
+
+/* ---------- 답장 ---------- */
+const ta = $("reply");
+function grow(){ ta.style.height="auto"; ta.style.height=Math.min(ta.scrollHeight,160)+"px"; $("sendBtn").disabled = !ta.value.trim(); }
+ta.addEventListener("input", grow);
+ta.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing){ e.preventDefault(); reply(); } });
+$("sendBtn").onclick = reply;
+async function reply(){
+  const t = ta.value.trim().slice(0,1000); if (!t || !S.sel) return;
+  ta.value = ""; grow(); S.justSent = true;
+  try { await S.be.adminSend(S.sel, t); }
+  catch(e){ ta.value = t; grow(); toast("보내지 못했어요. 다시 시도해 주세요."); }
+}
+
+/* ---------- 삭제 ---------- */
+$("delBtn").onclick = () => { $("modal").hidden = false; };
+$("mNo").onclick = () => { $("modal").hidden = true; };
+$("mYes").onclick = async () => {
+  $("modal").hidden = true; const id = S.sel; if (!id) return;
+  try { await S.be.adminDelete(id); closeThread(); toast("대화를 삭제했어요."); } catch(e){ toast("삭제하지 못했어요."); }
+};
+
+/* ---------- 알림 ---------- */
+function updateNotiBtn(){
+  const p = ("Notification" in window) ? Notification.permission : "unsupported";
+  $("notiLbl").textContent = p === "granted" ? "알림 켜짐" : p === "denied" ? "알림 차단됨" : "알림 켜기";
+  $("notiBtn").hidden = p === "unsupported";
+}
+$("notiBtn").onclick = async () => {
+  if (!("Notification" in window)) return;
+  if (Notification.permission === "default") await Notification.requestPermission();
+  else if (Notification.permission === "denied") toast("브라우저 주소창의 사이트 설정에서 알림을 허용해 주세요.");
+  else toast("알림이 이미 켜져 있어요.");
+  updateNotiBtn();
+};
+function notify(title, body){
+  ping();
+  try {
+    if ("Notification" in window && Notification.permission === "granted" && document.hidden){
+      const n = new Notification(`새 상담 · ${title}`, { body, icon: "chat/avatar.jpg", tag: "ecw-" + title });
+      n.onclick = () => { window.focus(); n.close(); };
+    }
+  } catch(e){}
+}
+function ping(){
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [0, 0.14].forEach((t, i) => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.frequency.value = i ? 1175 : 880; o.type = "sine";
+      g.gain.setValueAtTime(0.0001, ctx.currentTime + t); g.gain.exponentialRampToValueAtTime(0.15, ctx.currentTime + t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + t + 0.28);
+      o.connect(g); g.connect(ctx.destination); o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + 0.3);
+    });
+  } catch(e){}
+}
+
+boot();
+</script>
+</body>
+</html>

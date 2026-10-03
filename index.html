@@ -1332,6 +1332,14 @@ html .ecw-head::after{background:radial-gradient(80% 120% at 0% 0%,var(--accent-
 html .ecw-chips button{border-color:var(--accent-line)}
 html .ecw-chips button:hover{background:var(--accent-soft)}
 html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
+
+/* 모바일에서도 장바구니·탑 버튼 표시 (하단 구매 바 · 상담 버튼 위) */
+@media(max-width:760px){
+  .quick{display:flex;right:14px;bottom:calc(84px + env(safe-area-inset-bottom,0px));gap:8px}
+  .quick .q-chat{display:none}
+  .quick button,.quick a{width:46px;height:46px}
+  .has-cw .quick{right:21px;bottom:calc(154px + env(safe-area-inset-bottom,0px))}
+}
 </style>
 </head>
 <body>

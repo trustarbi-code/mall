@@ -1256,9 +1256,8 @@ footer{background:var(--bg-2);border-top:0}
 .guide{padding-block:14px 0!important}
 .guide-in{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:20px;border:1px solid var(--accent-line);background:var(--accent-soft);border-radius:var(--radius-lg);padding:16px 20px}
 .g-lab{font-weight:800;font-size:1rem;letter-spacing:-.01em;color:var(--ink);line-height:1.35;padding-right:20px;border-right:1px solid var(--accent-line)}
-.g-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;counter-reset:g}
+.g-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:g}
 .g-steps li{position:relative}
-.g-steps li+li::before{content:"›";position:absolute;left:-8px;top:50%;transform:translate(-50%,-50%);color:var(--accent);font-size:1.2rem;font-weight:800}
 .g-steps a,.g-steps button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:1px solid var(--accent-line);padding:10px 12px;border-radius:12px;cursor:pointer;font:inherit;color:var(--ink);transition:transform .2s,box-shadow .2s}
 .g-steps a:hover,.g-steps button:hover{transform:translateY(-2px);box-shadow:0 8px 18px -10px rgba(0,0,0,.18)}
 .gn{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:800;font-size:.96rem}
@@ -1320,7 +1319,6 @@ details.photo-rv .rv-note{margin-bottom:18px}
   .g-lab{border-right:0;padding:0 0 8px;border-bottom:1px solid var(--accent-line)}
   .g-lab{text-align:center}
   .g-steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
-  .g-steps li+li::before{display:none}
   .g-steps a,.g-steps button{flex-direction:column;gap:6px;padding:8px 2px;text-align:center}
   .gt small{display:none}
   .gt b{font-size:.8rem}
@@ -1579,20 +1577,6 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
 </section>
 
 
-<!-- ── 이용 안내 ── -->
-<section class="guide" aria-label="이용 방법">
-  <div class="wrap">
-    <div class="guide-in">
-      <span class="g-lab">👋 처음이세요?<br>이렇게 둘러보세요</span>
-      <ol class="g-steps">
-        <li><a href="#best"><span class="gn num">1</span><span class="gt"><b>상품 둘러보기</b><small>프로젝트 4개를 상품처럼 살펴보세요</small></span></a></li>
-        <li><a href="#best"><span class="gn num">2</span><span class="gt"><b>장바구니 담기</b><small>관심 가는 프로젝트를 담아두세요</small></span></a></li>
-        <li><button type="button" data-open-cart><span class="gn num">3</span><span class="gt"><b>면접 제안하기</b><small>담은 목록으로 메일이 자동 작성돼요</small></span></button></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
 <!-- ── 베스트 상품 ── -->
 <section id="best">
   <div class="wrap">
@@ -1641,7 +1625,6 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
       </article>
       <div class="empty" id="empty" hidden><p>‘<b id="emptyQ"></b>’에 맞는 상품이 아직 없어요.<br>궁금한 역량은 실시간 상담으로 물어봐 주세요!</p><button type="button" class="btn line" id="resetF">전체 상품 보기</button></div>
     </div>
-    <div class="assure rvl"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>실제 프로젝트 4종</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>동료 후기 원문 24건</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>상세 Portfolio PDF 제공</span><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>대표 프로젝트 모두 기한 내 오픈</span></div>
   </div>
 </section>
 

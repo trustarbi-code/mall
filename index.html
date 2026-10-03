@@ -1338,7 +1338,80 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
   .quick{display:flex;right:14px;bottom:calc(84px + env(safe-area-inset-bottom,0px));gap:8px}
   .quick .q-chat{display:none}
   .quick button,.quick a{width:46px;height:46px}
-  .has-cw .quick{right:21px;bottom:calc(154px + env(safe-area-inset-bottom,0px))}
+  .has-cw .quick{right:27px;bottom:calc(152px + env(safe-area-inset-bottom,0px))}
+}
+/* 탑 버튼은 스크롤해야 나타나므로 맨 위에 두어, 장바구니가 상담 버튼 바로 위에 붙어 있게 */
+.quick .q-top{order:-1}
+
+
+/* ── v14: 베스트 상품 카드 단순화 (한 가지 톤 · 아이콘/코드/장식 제거) ── */
+.cchips{display:none!important}
+.filterbar{justify-content:flex-end;margin-bottom:10px}
+.card .th{aspect-ratio:5/4;border-radius:14px;background:var(--bg-2)}
+.card .pk{--pc:var(--ink);--pb:var(--bg-2);justify-content:flex-end;padding:clamp(16px,2vw,22px);transition:background .25s}
+.card .pk::before,.card .pk-ic,.card .pk-code{display:none}
+.card .pk-big{font-size:clamp(1.6rem,2.6vw,2.1rem);letter-spacing:-.045em;transition:color .25s}
+.card .pk-lab{display:none}
+.card:hover .pk{background:var(--accent-soft)}
+.card:hover .pk-big{color:var(--accent)}
+.card:hover .th .pk{transform:none}
+.card .th .wish{display:none}
+.card .flag span,.card .flag span.n,.card .flag span.g{background:#fff;color:var(--ink);font-weight:700;border:1px solid var(--line);font-size:.68rem;padding:3px 8px;border-radius:100px}
+.card .info{padding-top:12px}
+.card .br{color:var(--muted)}
+.card .ft s{color:var(--faint)}
+@media(max-width:760px){.card .th{aspect-ratio:1/1}.card .pk-big{font-size:1.45rem}.card .pk{padding:14px}}
+
+/* ── v15: 상품 카드 — 썸네일=성과, 본문=한 일 ── */
+.card .th{background:var(--accent-soft);border-radius:14px;aspect-ratio:5/4}
+.tk{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(16px,2vw,22px);transition:background .25s}
+.tk-kw{align-self:flex-start;font-size:.78rem;font-weight:800;color:var(--accent);margin-bottom:auto;padding-top:34px}
+.tk-lab{font-size:.78rem;font-weight:600;color:var(--ink-soft)}
+.tk-row{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px;margin-top:4px}
+.tk-row s{font-size:1rem;color:var(--muted);font-weight:600}
+.tk-row i{font-style:normal;color:var(--faint);font-weight:700}
+.tk-row b{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;letter-spacing:-.045em;line-height:1.05;color:var(--ink)}
+.tk-off{position:absolute;right:clamp(14px,1.8vw,20px);top:clamp(12px,1.6vw,16px);font-style:normal;background:var(--sale);color:#fff;font-weight:800;font-size:.8rem;padding:4px 10px;border-radius:100px}
+.card:hover .tk{background:rgba(255,255,255,.35)}
+.card .desc{margin-top:6px;font-size:.86rem;line-height:1.6;color:var(--ink-soft);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card .nm{-webkit-line-clamp:2}
+.card .desc{margin-bottom:12px}
+.card .c-more{margin-top:auto}
+@media(max-width:760px){
+  .card .th{aspect-ratio:1/1}
+  .tk{padding:12px}
+  .tk-kw{padding-top:30px;font-size:.72rem}
+  .tk-lab{font-size:.68rem;line-height:1.35}
+  .tk-row s{font-size:.82rem}
+  .tk-row b{font-size:1.45rem}
+  .tk-off{font-size:.68rem;padding:3px 7px;right:10px;top:10px}
+  .card .desc{font-size:.8rem;-webkit-line-clamp:4}
+}
+
+/* 2열(태블릿·모바일)에서는 썸네일 높이를 내용에 맞춰 빈 공간 제거 */
+@media(max-width:980px){
+  .card .th{aspect-ratio:auto!important;height:auto}
+  .tk{position:relative;inset:auto;min-height:0;padding:14px 14px 16px}
+  .tk-kw{margin-bottom:22px;padding-top:34px}
+}
+
+/* 배너 '35초 영상 보기' 버튼 컴팩트하게 (얼굴 아이콘·버튼 높이 축소) */
+.hero .film-cta{gap:10px;padding:5px 15px 5px 5px}
+.hero .film-cta .thw{width:34px;height:34px}
+.hero .film-cta .pb{width:15px;height:15px;right:-3px;bottom:-3px}
+.hero .film-cta .pb svg{width:7px;height:7px}
+.hero .film-cta .tx{gap:1px}
+.hero .film-cta .tx b{font-size:.9rem}
+.hero .film-cta .tx small{font-size:.54rem;margin-top:0}
+.hero .film-cta .ar{margin-left:2px}
+.hero .film-cta .th{background:#fff}
+.hero .film-cta .th img{object-fit:cover;object-position:50% 8%}
+.hero .hero-cta .btn{height:44px}
+@media(max-width:760px){
+  .hero .film-cta{padding:4px 13px 4px 4px;gap:9px}
+  .hero .film-cta .thw{width:30px;height:30px}
+  .hero .film-cta .tx b{font-size:.84rem}
+  .hero .film-cta .tx small{font-size:.5rem}
 }
 </style>
 </head>
@@ -1396,7 +1469,7 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
             <div class="hstats"><div><b class="num">11<small>년</small></b><span>운영 경력</span></div><div><b class="num">4<small>개</small></b><span>대표 프로젝트</span></div><div><b class="num">24<small>건</small></b><span>동료 후기</span></div></div>
             <div class="hero-cta">
               <button class="film-cta" type="button" id="filmCta" aria-label="35초 자기소개 영상 보기">
-                <span class="thw"><span class="th"><img width="200" height="200" src="data:image/webp;base64,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" alt=""></span><span class="pb" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg></span></span>
+                <span class="thw"><span class="th"><img width="736" height="931" data-copy="profile" alt=""></span><span class="pb" aria-hidden="true"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg></span></span>
                 <span class="tx"><b>35초 상품 영상 보기</b><small>BRAND FILM · 0:35</small></span><span class="ar" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
               </button>
               <a class="btn line" href="#best">베스트 상품 보기</a>
@@ -1441,41 +1514,41 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
     <div class="filterbar"><div class="cchips" id="cats" role="group" aria-label="역량으로 보기"><button type="button" class="cchip on" data-cat="all">전체</button><button type="button" class="cchip" data-cat="process">프로세스 표준화</button><button type="button" class="cchip" data-cat="ai">AI 자동화</button><button type="button" class="cchip" data-cat="data">데이터 운영</button><button type="button" class="cchip" data-cat="collab">유관부서 협업</button><button type="button" class="cchip" data-cat="contract">계약·IP 검토</button></div><span class="res" id="resTxt">총 <b>4</b>개 상품</span></div>
     <div class="grid" id="grid">
       <article class="card rvl" data-id="p01" data-cats="process ai" data-order="1" data-date="2024" data-off="70" data-kw="온보딩 표준화 AI 자동화 Claude 이관 PM 메이크샵 커넥트웨이브 프로세스 매뉴얼 메일 웹진 콘텐츠">
-        <div class="th" data-open-pdp="p01"><div class="pk pk-p01"><span class="pk-code num">P01</span><svg class="pk-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg><span class="pk-big pk-word">AI 자동화</span><span class="pk-lab">온보딩 표준화</span></div><div class="flag"><span class="n">재직중</span></div><button type="button" class="wish" data-wish="p01" aria-label="P01 찜하기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.3 3.9 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4c3.4 0 5.7 3.3 4.5 6.7C19.5 15.4 12 20 12 20z"/></svg></button></div>
+        <div class="th" data-open-pdp="p01"><div class="tk"><span class="tk-kw">AI 자동화</span><span class="tk-lab">안내 메일 처리 · 건당</span><span class="tk-row"><s>10분</s><i>→</i><b>3분</b></span><em class="tk-off num">70%↓</em></div><div class="flag"><span class="n">자동화 성공</span></div><button type="button" class="wish" data-wish="p01" aria-label="P01 찜하기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.3 3.9 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4c3.4 0 5.7 3.3 4.5 6.7C19.5 15.4 12 20 12 20z"/></svg></button></div>
         <div class="info">
           <span class="br">커넥트웨이브 · 메이크샵</span>
           <h3 class="nm" data-open-pdp="p01">온보딩 표준화 + AI 자동화</h3>
-          <div class="ft"><span class="lab">안내 메일 처리 · 건당</span><div class="row"><s>10분</s><i>→</i><b>3분</b><em class="num">70%↓</em></div></div>
+          <p class="desc">플랫폼마다 다르던 쇼핑몰 이관 업무를 5단계로 표준화하고, 반복 메일은 Claude로 자동화했어요.</p>
           <button type="button" class="c-more" data-open-pdp="p01">상세 보기<span aria-hidden="true">›</span></button>
           <button type="button" class="addi" data-add="p01" aria-label="장바구니 담기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 11.2a1.5 1.5 0 0 0 1.5 1.2h8.9a1.5 1.5 0 0 0 1.5-1.1L21 8H6"/><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/></svg></button>
         </div>
       </article>
       <article class="card rvl" data-id="p02" data-cats="process data" data-order="2" data-date="2022" data-off="90" data-kw="적정재고 재고 발주 ROP 수요예측 데이터 리드타임 신성씨앤에스 렌탈 지식페스티벌 최우수상 파트장 리딩 코칭">
-        <div class="th" data-open-pdp="p02"><div class="pk pk-p02"><span class="pk-code num">P02</span><svg class="pk-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span class="pk-big pk-word">적정재고</span><span class="pk-lab">데이터 발주 체계</span></div><div class="flag"><span class="g">최우수상</span></div><button type="button" class="wish" data-wish="p02" aria-label="P02 찜하기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.3 3.9 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4c3.4 0 5.7 3.3 4.5 6.7C19.5 15.4 12 20 12 20z"/></svg></button></div>
+        <div class="th" data-open-pdp="p02"><div class="tk"><span class="tk-kw">적정재고</span><span class="tk-lab">납기 지연 안내 통화 · 월평균</span><span class="tk-row"><s>5건</s><i>→</i><b>1건 이하</b></span><em class="tk-off num">80%↓</em></div><div class="flag"><span class="g">최우수상</span></div><button type="button" class="wish" data-wish="p02" aria-label="P02 찜하기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.3 3.9 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4c3.4 0 5.7 3.3 4.5 6.7C19.5 15.4 12 20 12 20z"/></svg></button></div>
         <div class="info">
           <span class="br">신성씨앤에스</span>
           <h3 class="nm" data-open-pdp="p02">적정재고 운용 체계</h3>
-          <div class="ft"><span class="lab">납기 지연 안내 통화 · 월평균</span><div class="row"><s>5건</s><i>→</i><b>1건 이하</b><em class="num">80%↓</em></div></div>
+          <p class="desc">매일 출고되는 렌탈사 재고를 '감' 대신 출고 데이터·리드타임 기준으로 운영하게 바꿨어요.</p>
           <button type="button" class="c-more" data-open-pdp="p02">상세 보기<span aria-hidden="true">›</span></button>
           <button type="button" class="addi" data-add="p02" aria-label="장바구니 담기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 11.2a1.5 1.5 0 0 0 1.5 1.2h8.9a1.5 1.5 0 0 0 1.5-1.1L21 8H6"/><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/></svg></button>
         </div>
       </article>
       <article class="card rvl" data-id="p03" data-cats="collab" data-order="3" data-date="2016" data-off="50" data-kw="OEM 납기 관리 케이씨이 연구소 구매 생산 품질 협업 ERP 철도 CCTV 발열카메라 코로나 MOQ 자재">
-        <div class="th" data-open-pdp="p03"><div class="pk pk-p03"><span class="pk-code num">P03</span><svg class="pk-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h12v9H2zM14 10h4l3 3v3h-7"/><circle cx="6" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><span class="pk-big pk-word">OEM 납기</span><span class="pk-lab">유관부서 단일 창구</span></div><div class="flag"><span>적시 오픈</span></div><button type="button" class="wish" data-wish="p03" aria-label="P03 찜하기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.3 3.9 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4c3.4 0 5.7 3.3 4.5 6.7C19.5 15.4 12 20 12 20z"/></svg></button></div>
+        <div class="th" data-open-pdp="p03"><div class="tk"><span class="tk-kw">OEM 납기</span><span class="tk-lab">고객 응대 업무 비중</span><span class="tk-row"><s>30%</s><i>→</i><b>65%</b></span><em class="tk-off num">2배↑</em></div><div class="flag"><span>적시 오픈</span></div><button type="button" class="wish" data-wish="p03" aria-label="P03 찜하기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.3 3.9 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4c3.4 0 5.7 3.3 4.5 6.7C19.5 15.4 12 20 12 20z"/></svg></button></div>
         <div class="info">
           <span class="br">케이씨이</span>
           <h3 class="nm" data-open-pdp="p03">OEM 전용 개발 · 납기 관리</h3>
-          <div class="ft"><span class="lab">고객 응대 업무 비중</span><div class="row"><s>30%</s><i>→</i><b>65%</b><em class="num">2배↑</em></div></div>
+          <p class="desc">고객사·연구소·생산 사이 단일 창구로, 전용 개발 OEM을 모두 기한 안에 공급했어요.</p>
           <button type="button" class="c-more" data-open-pdp="p03">상세 보기<span aria-hidden="true">›</span></button>
           <button type="button" class="addi" data-add="p03" aria-label="장바구니 담기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 11.2a1.5 1.5 0 0 0 1.5 1.2h8.9a1.5 1.5 0 0 0 1.5-1.1L21 8H6"/><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/></svg></button>
         </div>
       </article>
       <article class="card rvl" data-id="p04" data-cats="contract" data-order="4" data-date="2015" data-off="0" data-kw="독점계약 독점 라이선스 계약 IP 채널 확장 쏠코리아 무역 미니언즈 유니버셜 패키지 편의점 창고형 드러그스토어 입점">
-        <div class="th" data-open-pdp="p04"><div class="pk pk-p04"><span class="pk-code num">P04</span><svg class="pk-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg><span class="pk-big pk-word">독점 계약</span><span class="pk-lab">판매 채널 확장</span></div><div class="flag"><span class="n">국내 독점</span></div><button type="button" class="wish" data-wish="p04" aria-label="P04 찜하기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.3 3.9 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4c3.4 0 5.7 3.3 4.5 6.7C19.5 15.4 12 20 12 20z"/></svg></button></div>
+        <div class="th" data-open-pdp="p04"><div class="tk"><span class="tk-kw">독점 계약</span><span class="tk-lab">판매 채널</span><span class="tk-row"><s>도소매</s><i>→</i><b>+3채널</b></span><em class="tk-off num">확장</em></div><div class="flag"><span class="n">국내 독점</span></div><button type="button" class="wish" data-wish="p04" aria-label="P04 찜하기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.3 3.9 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4c3.4 0 5.7 3.3 4.5 6.7C19.5 15.4 12 20 12 20z"/></svg></button></div>
         <div class="info">
           <span class="br">쏠코리아</span>
           <h3 class="nm" data-open-pdp="p04">독점 상품 발굴 · 채널 확장</h3>
-          <div class="ft"><span class="lab">판매 채널</span><div class="row"><s>도소매</s><i>→</i><b>+3채널</b><em class="num">확장</em></div></div>
+          <p class="desc">공식 라이선스 독점 상품을 들여와 편의점·창고형 마켓·드러그스토어까지 판로를 넓혔어요.</p>
           <button type="button" class="c-more" data-open-pdp="p04">상세 보기<span aria-hidden="true">›</span></button>
           <button type="button" class="addi" data-add="p04" aria-label="장바구니 담기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 11.2a1.5 1.5 0 0 0 1.5 1.2h8.9a1.5 1.5 0 0 0 1.5-1.1L21 8H6"/><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/></svg></button>
         </div>

@@ -1407,6 +1407,11 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
 .hero .film-cta .th{background:#fff}
 .hero .film-cta .th img{object-fit:cover;object-position:50% 8%}
 .hero .hero-cta .btn{height:44px}
+/* PC는 우측에 이미 프로필 사진이 있으므로 버튼 안 얼굴 아이콘은 생략 */
+@media(min-width:761px){
+  .hero .film-cta{padding:12px 20px}
+  .hero .film-cta .thw{display:none}
+}
 @media(max-width:760px){
   .hero .film-cta{padding:4px 13px 4px 4px;gap:9px}
   .hero .film-cta .thw{width:30px;height:30px}
@@ -1514,9 +1519,8 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
     <div class="filterbar"><div class="cchips" id="cats" role="group" aria-label="역량으로 보기"><button type="button" class="cchip on" data-cat="all">전체</button><button type="button" class="cchip" data-cat="process">프로세스 표준화</button><button type="button" class="cchip" data-cat="ai">AI 자동화</button><button type="button" class="cchip" data-cat="data">데이터 운영</button><button type="button" class="cchip" data-cat="collab">유관부서 협업</button><button type="button" class="cchip" data-cat="contract">계약·IP 검토</button></div><span class="res" id="resTxt">총 <b>4</b>개 상품</span></div>
     <div class="grid" id="grid">
       <article class="card rvl" data-id="p01" data-cats="process ai" data-order="1" data-date="2024" data-off="70" data-kw="온보딩 표준화 AI 자동화 Claude 이관 PM 메이크샵 커넥트웨이브 프로세스 매뉴얼 메일 웹진 콘텐츠">
-        <div class="th" data-open-pdp="p01"><div class="tk"><span class="tk-kw">AI 자동화</span><span class="tk-lab">안내 메일 처리 · 건당</span><span class="tk-row"><s>10분</s><i>→</i><b>3분</b></span><em class="tk-off num">70%↓</em></div><div class="flag"><span class="n">자동화 성공</span></div><button type="button" class="wish" data-wish="p01" aria-label="P01 찜하기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.3 3.9 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4c3.4 0 5.7 3.3 4.5 6.7C19.5 15.4 12 20 12 20z"/></svg></button></div>
+        <div class="th" data-open-pdp="p01"><div class="tk"><span class="tk-kw">AI 자동화</span><span class="tk-lab">안내 메일 처리 · 건당</span><span class="tk-row"><s>10분</s><i>→</i><b>3분</b></span><em class="tk-off num">70%↓</em></div><div class="flag"><span class="n">자동화</span></div><button type="button" class="wish" data-wish="p01" aria-label="P01 찜하기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.3 3.9 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4c3.4 0 5.7 3.3 4.5 6.7C19.5 15.4 12 20 12 20z"/></svg></button></div>
         <div class="info">
-          <span class="br">커넥트웨이브 · 메이크샵</span>
           <h3 class="nm" data-open-pdp="p01">온보딩 표준화 + AI 자동화</h3>
           <p class="desc">플랫폼마다 다르던 쇼핑몰 이관 업무를 5단계로 표준화하고, 반복 메일은 Claude로 자동화했어요.</p>
           <button type="button" class="c-more" data-open-pdp="p01">상세 보기<span aria-hidden="true">›</span></button>
@@ -1526,7 +1530,6 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
       <article class="card rvl" data-id="p02" data-cats="process data" data-order="2" data-date="2022" data-off="90" data-kw="적정재고 재고 발주 ROP 수요예측 데이터 리드타임 신성씨앤에스 렌탈 지식페스티벌 최우수상 파트장 리딩 코칭">
         <div class="th" data-open-pdp="p02"><div class="tk"><span class="tk-kw">적정재고</span><span class="tk-lab">납기 지연 안내 통화 · 월평균</span><span class="tk-row"><s>5건</s><i>→</i><b>1건 이하</b></span><em class="tk-off num">80%↓</em></div><div class="flag"><span class="g">최우수상</span></div><button type="button" class="wish" data-wish="p02" aria-label="P02 찜하기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.3 3.9 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4c3.4 0 5.7 3.3 4.5 6.7C19.5 15.4 12 20 12 20z"/></svg></button></div>
         <div class="info">
-          <span class="br">신성씨앤에스</span>
           <h3 class="nm" data-open-pdp="p02">적정재고 운용 체계</h3>
           <p class="desc">매일 출고되는 렌탈사 재고를 '감' 대신 출고 데이터·리드타임 기준으로 운영하게 바꿨어요.</p>
           <button type="button" class="c-more" data-open-pdp="p02">상세 보기<span aria-hidden="true">›</span></button>
@@ -1536,7 +1539,6 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
       <article class="card rvl" data-id="p03" data-cats="collab" data-order="3" data-date="2016" data-off="50" data-kw="OEM 납기 관리 케이씨이 연구소 구매 생산 품질 협업 ERP 철도 CCTV 발열카메라 코로나 MOQ 자재">
         <div class="th" data-open-pdp="p03"><div class="tk"><span class="tk-kw">OEM 납기</span><span class="tk-lab">고객 응대 업무 비중</span><span class="tk-row"><s>30%</s><i>→</i><b>65%</b></span><em class="tk-off num">2배↑</em></div><div class="flag"><span>적시 오픈</span></div><button type="button" class="wish" data-wish="p03" aria-label="P03 찜하기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.3 3.9 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4c3.4 0 5.7 3.3 4.5 6.7C19.5 15.4 12 20 12 20z"/></svg></button></div>
         <div class="info">
-          <span class="br">케이씨이</span>
           <h3 class="nm" data-open-pdp="p03">OEM 전용 개발 · 납기 관리</h3>
           <p class="desc">고객사·연구소·생산 사이 단일 창구로, 전용 개발 OEM을 모두 기한 안에 공급했어요.</p>
           <button type="button" class="c-more" data-open-pdp="p03">상세 보기<span aria-hidden="true">›</span></button>
@@ -1546,7 +1548,6 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
       <article class="card rvl" data-id="p04" data-cats="contract" data-order="4" data-date="2015" data-off="0" data-kw="독점계약 독점 라이선스 계약 IP 채널 확장 쏠코리아 무역 미니언즈 유니버셜 패키지 편의점 창고형 드러그스토어 입점">
         <div class="th" data-open-pdp="p04"><div class="tk"><span class="tk-kw">독점 계약</span><span class="tk-lab">판매 채널</span><span class="tk-row"><s>도소매</s><i>→</i><b>+3채널</b></span><em class="tk-off num">확장</em></div><div class="flag"><span class="n">국내 독점</span></div><button type="button" class="wish" data-wish="p04" aria-label="P04 찜하기"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.3C1.6 7.3 3.9 4 7.3 4c2 0 3.6 1.1 4.7 2.7C13.1 5.1 14.7 4 16.7 4c3.4 0 5.7 3.3 4.5 6.7C19.5 15.4 12 20 12 20z"/></svg></button></div>
         <div class="info">
-          <span class="br">쏠코리아</span>
           <h3 class="nm" data-open-pdp="p04">독점 상품 발굴 · 채널 확장</h3>
           <p class="desc">공식 라이선스 독점 상품을 들여와 편의점·창고형 마켓·드러그스토어까지 판로를 넓혔어요.</p>
           <button type="button" class="c-more" data-open-pdp="p04">상세 보기<span aria-hidden="true">›</span></button>
@@ -1925,7 +1926,7 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
   <div class="evt-top">
     <button type="button" class="evt-x" data-evt-close aria-label="닫기">&times;</button>
     <span class="evt-badge"><i></i>OPEN EVENT · 지금 영입 가능</span>
-    <div class="evt-face"><img data-copy="profile" alt="" width="736" height="931"><span class="evt-stk">구직중</span></div>
+    <div class="evt-face"><img data-copy="profile" alt="" width="736" height="931"><span class="evt-stk">매진임박</span></div>
   </div>
   <div class="evt-body">
     <h2 id="evtTitle"><small>놓치지 마세요!</small><span>11년 차 운영 PM</span><br>지금 영입 가능해요</h2>

@@ -105,7 +105,7 @@ nav.gnb .pdfbtn::after{display:none}
 }
 
 /* ── hero carousel ── */
-.hero{padding-block:18px 0}
+.hero{padding-block:18px clamp(52px,7vw,80px)}
 .slider{position:relative;border-radius:var(--radius-lg);overflow:hidden;background:var(--bg-3)}
 .slides{display:flex;transition:transform .7s cubic-bezier(.6,0,.2,1)}
 .slide{flex:0 0 100%;min-height:clamp(420px,46vw,500px);display:grid;grid-template-columns:1.25fr .75fr;align-items:center;gap:clamp(20px,4vw,48px);padding:clamp(28px,5vw,60px) clamp(22px,5vw,64px)}
@@ -157,7 +157,7 @@ nav.gnb .pdfbtn::after{display:none}
 .slider.dark-dots .dots button.on{background:#fff}
 @media(max-width:760px){
   .slide{grid-template-columns:1fr;padding:28px 20px 64px;min-height:0;align-content:start}
-  .slide .vis{order:-1;width:min(62%,220px);justify-self:start}
+  .slide .vis{order:-1;width:min(62%,220px);justify-self:center;margin-inline:auto}
   .slide.s2 .vis,.slide.s3 .vis{width:100%}
   .sticker{width:76px;height:76px;top:-8px;right:-30px}
   .sticker b{font-size:1.5rem}
@@ -1267,7 +1267,7 @@ footer{background:var(--bg-2);border-top:0}
 .gt small{color:var(--muted)}
 .gt b{font-size:.92rem;font-weight:800}
 .gt small{font-size:.76rem;color:var(--muted);line-height:1.4}
-#best{padding-top:clamp(40px,5vw,60px)}
+#best{padding-top:clamp(52px,7vw,80px)}
 .card .th::after{display:none}
 .card .ft{margin-top:8px;padding-right:46px}
 .card .ft .lab{display:block;font-size:.72rem;color:var(--muted)}
@@ -1541,7 +1541,7 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
 
 <main id="top">
 <!-- ── 메인 배너 ── -->
-<section class="hero" aria-label="메인 배너" style="padding-bottom:0">
+<section class="hero" aria-label="메인 배너">
   <div class="wrap">
     <div class="slider" id="slider" aria-roledescription="carousel">
       <div class="slides" id="slides">

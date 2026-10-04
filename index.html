@@ -759,7 +759,7 @@ footer{background:var(--bg-2);border-top:0}
 .evt-foot button+button{border-left:1px solid var(--line);color:var(--ink);font-weight:700}
 .evt-foot button:hover{background:var(--bg-2)}
 @media(max-width:640px){
-  .evt{left:0;right:0;top:auto;bottom:0;width:100%;transform:none;border-radius:22px 22px 0 0;animation:sheetUp .45s cubic-bezier(.2,.9,.3,1);padding-bottom:env(safe-area-inset-bottom,0px)}
+  .evt{left:0;right:0;top:auto;bottom:0;width:100%;transform:none;border-radius:22px 22px 0 0;animation:sheetUp .45s cubic-bezier(.2,.9,.3,1);padding-bottom:env(safe-area-inset-bottom,0px);max-height:min(62vh,440px);overflow-y:auto}
   @keyframes sheetUp{from{transform:translateY(100%)}}
   .evt-top{height:128px}
   .evt-body h2{font-size:1.38rem}
@@ -777,7 +777,7 @@ footer{background:var(--bg-2);border-top:0}
 .evt-body h2{font-size:1.4rem;line-height:1.4}
 .evt-btns{margin-top:18px}
 .evt-body h2 small{display:block;font-size:.62em;font-weight:700;color:var(--sale);letter-spacing:-.01em;margin-bottom:4px}
-@media(max-width:640px){.evt{width:100%}.evt-top{height:auto;padding:22px 20px 22px}.evt-body h2{font-size:1.34rem}}
+@media(max-width:640px){.evt{width:100%}.evt-top{height:auto;padding:16px 20px 18px;gap:10px}.evt-face{width:68px;height:68px}.evt-stk{right:-14px;top:-2px;font-size:.62rem;padding:4px 7px}.evt-body{padding:16px 22px 16px}.evt-body h2{font-size:1.2rem;line-height:1.36}.evt-body h2 small{margin-bottom:2px}.evt-btns{margin-top:12px}}
 
 
 /* 장바구니: 오은비 1개 상품 + 프로젝트 옵션 */
@@ -1562,7 +1562,6 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
       </div>
       <div class="gnb-sub">
         <a href="#" data-pdf-page="1"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5"/></svg>상세 Portfolio</a>
-        <a href="#cs"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/></svg>고객센터</a>
       </div>
     </div>
   </nav>
@@ -2060,7 +2059,7 @@ html .ecw-launch:focus-visible{outline-color:var(--accent-line)}
   <div class="evt-top">
     <button type="button" class="evt-x" data-evt-close aria-label="닫기">&times;</button>
     <span class="evt-badge"><i></i>OPEN EVENT · 지금 영입 가능</span>
-    <div class="evt-face"><img data-copy="profile" alt="오은비 프로필 사진" width="92" height="92"><span class="evt-stk">매진임박</span></div>
+    <div class="evt-face"><img data-copy="profile" alt="오은비 프로필 사진" width="92" height="92"><span class="evt-stk">즉시 면접 가능</span></div>
   </div>
   <div class="evt-body">
     <h2 id="evtTitle"><small>놓치지 마세요!</small><span>11년 차 운영 PM</span><br>지금 영입 가능해요</h2>
